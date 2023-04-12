@@ -14,7 +14,7 @@ api.id=
 api.hash=
 [application]
 # log.level = info | debug | error
-log.level=debug
+log.level=info
 ```
 
 ## Links
