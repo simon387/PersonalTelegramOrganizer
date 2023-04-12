@@ -1,9 +1,24 @@
 import asyncio
+import logging as log
 from asyncio import sleep
+from logging.handlers import RotatingFileHandler
 
 from telethon import TelegramClient
 
 import constants as c
+
+log.basicConfig(
+	handlers=[
+		RotatingFileHandler(
+			'PersonalTelegramOrganizer.log',
+			maxBytes=10240000,
+			backupCount=5
+		),
+		log.StreamHandler()
+	],
+	format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+	level=c.LOG_LEVEL
+)
 
 api_id = c.API_ID
 api_hash = c.API_HASH
@@ -12,27 +27,26 @@ client = TelegramClient('session_name', api_id, api_hash)
 client.start()
 
 
+def get_version():
+	with open("changelog.txt") as f:
+		firstline = f.readline().rstrip()
+	return firstline
+
+
 async def main():
 	while True:
+		log.info("New loop!")
 		channel = await client.get_entity('offertepromozioniscontibaby')
 		await client.send_read_acknowledge(channel)
-		print ("ciao")
-		await sleep(3) # sleep for a min
+		channel = await client.get_entity('scontioffertepromozionicuracorpo')
+		await client.send_read_acknowledge(channel)
+		channel = await client.get_entity('offertescontipromozionielettro')
+		await client.send_read_acknowledge(channel)
+		channel = await client.get_entity('schedevideooffertepromozioni')
+		await client.send_read_acknowledge(channel)
+		await sleep(8)
 
-	# messages = await client.get_messages(channel, limit=50)  # pass your own args
-	#
-	# # then if you want to get all the messages text
-	# for x in messages:
-	# 	print(x.text)  # return message.text
-
-
+version = get_version()
+log.info("Starting PersonalTelegramOrganizer, " + version)
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
-#
-# if __name__ == '__main__':
-# 	loop = asyncio.new_event_loop()
-# 	asyncio.set_event_loop(loop)
-# 	try:
-# 		asyncio.run(main( ))
-# 	except KeyboardInterrupt:
-# 		pass
