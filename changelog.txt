@@ -1,1 +1,4 @@
+Version 1.0.1
+- added custom_exception_handler
+
 Version 1.0.0
