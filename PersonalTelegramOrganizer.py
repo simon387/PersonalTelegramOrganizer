@@ -68,3 +68,4 @@ loop.set_exception_handler(custom_exception_handler)
 loop.run_until_complete(main())
 # loop.create_task(main())
 # loop.run_forever()
+# https://stackoverflow.com/questions/65919775/telethon-events-newmessage-from-specific-channel
