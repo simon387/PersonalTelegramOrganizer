@@ -1,12 +1,10 @@
-import asyncio
 import logging as log
 import os
 import sys
 import time as time_os
-from asyncio import sleep
 from logging.handlers import RotatingFileHandler
 
-from telethon import TelegramClient
+from telethon import TelegramClient, events
 
 import constants as c
 
@@ -23,10 +21,7 @@ log.basicConfig(
 	level=c.LOG_LEVEL
 )
 
-api_id = c.API_ID
-api_hash = c.API_HASH
-
-client = TelegramClient('session_name', api_id, api_hash)
+client = TelegramClient('session_name', c.API_ID, c.API_HASH)
 client.start()
 
 
@@ -47,25 +42,16 @@ async def custom_exception_handler(loop_, context) -> None:
 	os.execl(sys.executable, sys.executable, *sys.argv)
 
 
-async def main():
-	while True:
-		log.info("New loop!")
-		channel = await client.get_entity('offertepromozioniscontibaby')
-		await client.send_read_acknowledge(channel)
-		channel = await client.get_entity('scontioffertepromozionicuracorpo')
-		await client.send_read_acknowledge(channel)
-		channel = await client.get_entity('offertescontipromozionielettro')
-		await client.send_read_acknowledge(channel)
-		channel = await client.get_entity('schedevideooffertepromozioni')
-		await client.send_read_acknowledge(channel)
-		await sleep(16)
+@client.on(events.NewMessage(c.C1))
+@client.on(events.NewMessage(c.C2))
+@client.on(events.NewMessage(c.C3))
+@client.on(events.NewMessage(c.C4))
+async def on_new_msg_c1(event):
+	log.info(f'Got new Message from {event.chat.username}, setting it as read')
+	channel = await client.get_entity(event.chat.username)
+	await client.send_read_acknowledge(channel)
 
 
 version = get_version()
-log.info("Starting PersonalTelegramOrganizer, " + version)
-loop = asyncio.get_event_loop()
-loop.set_exception_handler(custom_exception_handler)
-loop.run_until_complete(main())
-# loop.create_task(main())
-# loop.run_forever()
-# https://stackoverflow.com/questions/65919775/telethon-events-newmessage-from-specific-channel
+log.info(f'Starting PersonalTelegramOrganizer, {version}')
+client.run_until_disconnected()
