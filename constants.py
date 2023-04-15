@@ -18,3 +18,9 @@ elif case == "error":
 	LOG_LEVEL = logging.ERROR
 else:
 	LOG_LEVEL = logging.DEBUG
+# channels and group
+CHANNELS_AND_GROUPS = 'channels_and_groups'
+C1 = config.get(CHANNELS_AND_GROUPS, "c1")
+C2 = config.get(CHANNELS_AND_GROUPS, "c2")
+C3 = config.get(CHANNELS_AND_GROUPS, "c3")
+C4 = config.get(CHANNELS_AND_GROUPS, "c4")
