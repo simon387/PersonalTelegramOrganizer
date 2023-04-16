@@ -1,3 +1,6 @@
+Version 1.0.3
+- changed file log name
+
 Version 1.0.2
 - fixed flow error
 

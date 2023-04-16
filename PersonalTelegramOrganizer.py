@@ -11,7 +11,7 @@ import constants as c
 log.basicConfig(
 	handlers=[
 		RotatingFileHandler(
-			'PersonalTelegramOrganizer.log',
+			'_PersonalTelegramOrganizer.log',
 			maxBytes=10240000,
 			backupCount=5
 		),
@@ -46,7 +46,7 @@ async def custom_exception_handler(loop_, context) -> None:
 @client.on(events.NewMessage(c.C2))
 @client.on(events.NewMessage(c.C3))
 @client.on(events.NewMessage(c.C4))
-async def on_new_msg_c1(event):
+async def on_new_msg(event):
 	log.info(f'Got new Message from {event.chat.username}, setting it as read')
 	channel = await client.get_entity(event.chat.username)
 	await client.send_read_acknowledge(channel)
