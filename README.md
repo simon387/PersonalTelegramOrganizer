@@ -26,3 +26,4 @@ c4=schedevideooffertepromozioni
 
 + https://my.telegram.org
 + https://github.com/LonamiWebs/Telethon
++ pyrogram
