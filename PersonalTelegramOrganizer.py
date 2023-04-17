@@ -4,7 +4,7 @@ import sys
 import time as time_os
 from logging.handlers import RotatingFileHandler
 
-from telethon import TelegramClient, events
+from pyrogram import Client
 
 import constants as c
 
@@ -21,8 +21,7 @@ log.basicConfig(
 	level=c.LOG_LEVEL
 )
 
-client = TelegramClient('session_name', c.API_ID, c.API_HASH)
-client.start()
+app = Client("session_name", c.API_ID, c.API_HASH)
 
 
 def get_version():
@@ -42,16 +41,23 @@ async def custom_exception_handler(loop_, context) -> None:
 	os.execl(sys.executable, sys.executable, *sys.argv)
 
 
-@client.on(events.NewMessage(c.C1))
-@client.on(events.NewMessage(c.C2))
-@client.on(events.NewMessage(c.C3))
-@client.on(events.NewMessage(c.C4))
-async def on_new_msg(event):
-	log.info(f'Got new Message from {event.chat.username}, setting it as read')
-	channel = await client.get_entity(event.chat.username)
-	await client.send_read_acknowledge(channel)
+@app.on_message()
+async def on_message(client, message):
+	if message.chat.username == c.C1:
+		await set_read(c.C1)
+	if message.chat.username == c.C2:
+		await set_read(c.C2)
+	if message.chat.username == c.C3:
+		await set_read(c.C3)
+	if message.chat.username == c.C4:
+		await set_read(c.C4)
+
+
+async def set_read(channel):
+	log.info(f"Setting channels {channel} as read!")
+	await app.read_chat_history(channel)
 
 
 version = get_version()
 log.info(f'Starting PersonalTelegramOrganizer, {version}')
-client.run_until_disconnected()
+app.run()

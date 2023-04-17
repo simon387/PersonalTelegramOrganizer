@@ -4,7 +4,9 @@ This software helps my Telegram chats/groups/channels management
 
 ## Dev's Setup
 
-+ ```pip3 install telethon```
++ ~~```pip3 install telethon```~~
++ ```pip3 install -U pyrogram```
++ ```pip3 install -U tgcrypto```
 
 ### config.properties
 

@@ -1,6 +1,6 @@
 .idea
 config.properties
-session_name.session
+*.session
 *.log
 *.log.*
 *.session-journal
