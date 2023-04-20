@@ -21,6 +21,7 @@ log.basicConfig(
 	level=c.LOG_LEVEL
 )
 
+counter = 0
 app = Client("session_name", c.API_ID, c.API_HASH)
 
 
@@ -43,18 +44,23 @@ async def custom_exception_handler(loop_, context) -> None:
 
 @app.on_message()
 async def on_message(client, message):
-	if message.chat.username == c.C1:
-		await set_read(c.C1)
-	if message.chat.username == c.C2:
-		await set_read(c.C2)
-	if message.chat.username == c.C3:
-		await set_read(c.C3)
-	if message.chat.username == c.C4:
-		await set_read(c.C4)
+	channel = message.chat.username
+	if channel == c.C1:
+		await set_read(channel)
+	elif channel == c.C2:
+		await set_read(channel)
+	elif channel == c.C3:
+		await set_read(channel)
+	elif channel == c.C4:
+		await set_read(channel)
+	elif channel == c.C5:
+		await set_read(channel)
 
 
 async def set_read(channel):
-	log.info(f"Setting channels {channel} as read!")
+	global counter
+	counter += 1
+	log.info(f"Setting channels {channel} as read! counter = {counter}")
 	await app.read_chat_history(channel)
 
 

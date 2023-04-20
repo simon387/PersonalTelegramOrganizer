@@ -1,3 +1,7 @@
+Version 1.1.1
+- added a channel
+- added counters
+
 Version 1.1.0
 - rm telethon
 - add pyrogram
