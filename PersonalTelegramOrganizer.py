@@ -43,25 +43,13 @@ async def custom_exception_handler(loop_, context) -> None:
 
 
 @app.on_message()
-async def on_message(client, message):
+async def on_message_set_it_as_read(client, message):
 	channel = message.chat.username
-	if channel == c.C1:
-		await set_read(channel)
-	elif channel == c.C2:
-		await set_read(channel)
-	elif channel == c.C3:
-		await set_read(channel)
-	elif channel == c.C4:
-		await set_read(channel)
-	elif channel == c.C5:
-		await set_read(channel)
-
-
-async def set_read(channel):
-	global counter
-	counter += 1
-	log.info(f"Setting channels {channel} as read! counter = {counter}")
-	await app.read_chat_history(channel)
+	if channel in c.channels.split(","):
+		global counter
+		counter += 1
+		log.info(f"Setting channels {channel} as read! counter = {counter}")
+		await app.read_chat_history(channel)
 
 
 version = get_version()
