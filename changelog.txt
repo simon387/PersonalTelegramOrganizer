@@ -1,3 +1,6 @@
+Version 1.1.2
+- better channel management
+
 Version 1.1.1
 - added a channel
 - added counters
