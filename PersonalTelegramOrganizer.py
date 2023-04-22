@@ -1,7 +1,4 @@
 import logging as log
-import os
-import sys
-import time as time_os
 from logging.handlers import RotatingFileHandler
 
 from pyrogram import Client
@@ -29,17 +26,6 @@ def get_version():
 	with open("changelog.txt") as f:
 		firstline = f.readline().rstrip()
 	return firstline
-
-
-async def custom_exception_handler(loop_, context) -> None:
-	# first, handle with default handler
-	loop_.default_exception_handler(context)
-	exception = context.get('exception')
-	if isinstance(exception, ValueError):
-		log.error(context['exception'])
-	# Restart the bot
-	time_os.sleep(5.0)
-	os.execl(sys.executable, sys.executable, *sys.argv)
 
 
 @app.on_message()
