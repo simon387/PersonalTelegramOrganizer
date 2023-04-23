@@ -3,7 +3,7 @@ from logging.handlers import RotatingFileHandler
 
 from pyrogram import Client
 
-import constants as c
+import Constants
 
 log.basicConfig(
 	handlers=[
@@ -15,11 +15,11 @@ log.basicConfig(
 		log.StreamHandler()
 	],
 	format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-	level=c.LOG_LEVEL
+	level=Constants.LOG_LEVEL
 )
 
 counter = 0
-app = Client("session_name", c.API_ID, c.API_HASH)
+app = Client("session_name", Constants.API_ID, Constants.API_HASH)
 
 
 def get_version():
@@ -31,10 +31,10 @@ def get_version():
 @app.on_message()
 async def on_message_set_it_as_read(client, message):
 	channel = message.chat.username
-	if channel in c.channels.split(","):
+	if channel in Constants.channels.split(","):
 		global counter
 		counter += 1
-		log.info(f"Setting channels {channel} as read! counter = {counter}")
+		log.info(f"Setting channels {channel} as read! counter = {counter}, APP_VERSION = {client.APP_VERSION}")
 		await app.read_chat_history(channel)
 
 
