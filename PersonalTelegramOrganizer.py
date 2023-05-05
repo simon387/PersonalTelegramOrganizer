@@ -38,6 +38,5 @@ async def on_message_set_it_as_read(client, message):
 		await app.read_chat_history(channel)
 
 
-version = get_version()
-log.info(f'Starting PersonalTelegramOrganizer, {version}')
+log.info(f'Starting PersonalTelegramOrganizer, {get_version()}')
 app.run()
