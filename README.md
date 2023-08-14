@@ -23,7 +23,8 @@ c=offertepromozioniscontibaby,\
   offertescontipromozionielettro,\
   schedevideooffertepromozioni,\
   liberioltre,\
-  salottoprogrammatori/1
+  salottoprogrammatori/1,\
+  salottoprogrammatori/294248
 ```
 
 ## Links
