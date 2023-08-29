@@ -23,7 +23,11 @@ c=offertepromozioniscontibaby,\
   offertescontipromozionielettro,\
   schedevideooffertepromozioni,\
   liberioltre,\
-  salottoprogrammatori/1,\
+  cascorossoclub,\
+  cascorossoit,\
+  MotoGPnotizie,\
+  salottoprogrammatori/294248,\
+  lucasalvadoricommunity,\
   salottoprogrammatori/294248
 ```
 
