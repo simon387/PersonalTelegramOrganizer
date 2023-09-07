@@ -18,7 +18,6 @@ log.basicConfig(
 	level=Constants.LOG_LEVEL
 )
 
-counter = 0
 app = Client("default_session", Constants.API_ID, Constants.API_HASH)
 
 
@@ -32,9 +31,7 @@ def get_version():
 async def on_message_set_it_as_read(client, message):
 	channel = message.chat.username
 	if channel in Constants.channels.split(","):
-		global counter
-		counter += 1
-		log.info(f"Setting channels {channel} as read! counter = {counter}, APP_VERSION = {client.APP_VERSION}")
+		log.info(f"{client.APP_VERSION} - Setting channels {channel} as read! message = {message}")
 		await app.read_chat_history(channel)
 
 
