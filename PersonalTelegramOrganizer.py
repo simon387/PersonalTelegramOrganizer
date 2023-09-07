@@ -19,7 +19,7 @@ log.basicConfig(
 )
 
 counter = 0
-app = Client("session_name", Constants.API_ID, Constants.API_HASH)
+app = Client("default_session", Constants.API_ID, Constants.API_HASH)
 
 
 def get_version():
