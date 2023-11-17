@@ -5,3 +5,4 @@ config.properties
 *.log.*
 *.session-journal
 __pycache__
+*.iml
