@@ -34,10 +34,10 @@ def get_version():
 async def on_message_set_it_as_read(client, message):
 	log.info("|")
 	channel = message.chat.username
-	log.info(f"Got message from this channel: {channel}")
+	log.info(f"Got message from channel: {channel}")
 	if channel in blacklist:
 		log.info(f"Channel {channel} found in the blacklist! Setting it as read!")
-		log.debug(f"{client.APP_VERSION} - Setting channels {channel} as read! message = {message}")
+		log.debug(f"{client.APP_VERSION} - Setting channel {channel} as read! message = {message}")
 		await app.read_chat_history(channel)
 
 		# START topic's management - Following code block is just for topic's chat
