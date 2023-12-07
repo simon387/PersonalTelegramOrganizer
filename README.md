@@ -18,7 +18,7 @@ api.hash=
 # log.level = info | debug | error
 log.level=info
 [channels_and_groups]
-c=
+c=offertepromozioniscontibaby,scontioffertepromozionicuracorpo,offertescontipromozionielettro,schedevideooffertepromozioni,liberioltre,cascorossoclub,cascorossoit,MotoGPnotizie,salottoprogrammatori,lucasalvadoricommunity,ptkdev_support_italian,entropyforlife,ClubWallapop,buscapiso,we_are_devs,circolettodevs,developerslifechannel,SteamDeckPortatil
 ```
 
 ## Links
