@@ -70,10 +70,13 @@ async def on_message_set_it_as_read(client, message):
 		log.info("________________________________")
 		# Use the resolved peer in ReadDiscussion
 		try:
-			await client.invoke(ReadDiscussion(peer=resolved_peer, msg_id=message.id, read_max_id=2**31-1))
+			await client.invoke(ReadDiscussion(peer=resolved_peer, msg_id=topic_id, read_max_id=2**31-1))
 		except BadRequest as e:
 			log.error(f"Telegram API error: {e}")
 			# Add additional logging or handling as needed
+		except Exception as e:
+			log.error(f"Telegram API error: {e}")
+		# Add additional logging or handling as needed
 
 	else:
 		log.info(f"Channel {channel} NOT found in the black list! Nothing to do...")
