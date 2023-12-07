@@ -1,3 +1,7 @@
+Version 1.2.2
+- update license
+- fix read for sub chats
+
 Version 1.2.1
 - added more logs
 
