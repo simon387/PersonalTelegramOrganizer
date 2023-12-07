@@ -6,3 +6,4 @@ config.properties
 *.session-journal
 __pycache__
 *.iml
+unknown_errors.txt
