@@ -21,6 +21,7 @@ log.basicConfig(
 )
 
 app = Client("default_session", Constants.API_ID, Constants.API_HASH)
+blacklist = Constants.channels.split(",")
 
 
 def get_version():
@@ -34,8 +35,8 @@ async def on_message_set_it_as_read(client, message):
 	log.info("|")
 	channel = message.chat.username
 	log.info(f"Got message from this channel: {channel}")
-	if channel in Constants.channels.split(","):
-		log.info(f"Channel {channel} found in the black list! Setting it as read!")
+	if channel in blacklist:
+		log.info(f"Channel {channel} found in the blacklist! Setting it as read!")
 		log.debug(f"{client.APP_VERSION} - Setting channels {channel} as read! message = {message}")
 		await app.read_chat_history(channel)
 
@@ -56,7 +57,7 @@ async def on_message_set_it_as_read(client, message):
 			log.error(f"Telegram error: {e}. Ignore this if {channel} doesn't have topics!")
 		# END topic's management
 	else:
-		log.info(f"Channel {channel} NOT found in the black list! Nothing to do...")
+		log.info(f"Channel {channel} NOT found in the blacklist! Nothing to do...")
 
 
 log.info(f'Starting PersonalTelegramOrganizer, {get_version()}')
