@@ -1,5 +1,9 @@
-Version 1.2.4
+Version 1.2.5
 - code optimization
+
+Version 1.2.4
+- update readme
+- update logs
 
 Version 1.2.3
 - code optimization
