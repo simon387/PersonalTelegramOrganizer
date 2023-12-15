@@ -41,7 +41,7 @@ async def on_message_set_it_as_read(client, message):
 	# channel is in the blacklist
 	log.info(f"Channel {channel} found in the blacklist! Setting it as read!")
 	log.debug(f"{client.APP_VERSION} - Setting channel {channel} as read! message = {message}")
-	await app.read_chat_history(channel)  # this fail is i a topic's chat
+	await app.read_chat_history(channel)  # this fails if it's a topic's chat
 	# START topic's management - Following code block is just for topic's chat
 	top = message.reply_to_top_message_id
 	if top:
