@@ -32,7 +32,6 @@ def get_version():
 
 @app.on_message()
 async def on_message_set_it_as_read(client, message):
-	log.info("|")
 	channel = message.chat.username
 	log.info(f"Got message from channel: {channel}")
 	if channel not in blacklist:
