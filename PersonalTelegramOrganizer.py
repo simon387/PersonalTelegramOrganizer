@@ -54,8 +54,10 @@ async def on_message_set_it_as_read(client, message):
 		await client.invoke(ReadDiscussion(peer=resolved_peer, msg_id=topic_id, read_max_id=2 ** 31 - 1))
 	except BadRequest as e:
 		log.error(f"Telegram API error: {e}")
+	except AttributeError as e:
+		log.debug(f"Telegram error: {e}. Ignore this if {channel} doesn't have topics!")
 	except Exception as e:
-		log.error(f"Telegram error: {e}. Ignore this if {channel} doesn't have topics!")
+		log.error(f"Telegram error: {e}. This need to be investigated!")
 	# END topic's management
 
 

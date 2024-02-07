@@ -1,3 +1,6 @@
+Version 1.2.7
+- better logs
+
 Version 1.2.6
 - removed a log
 
