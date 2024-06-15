@@ -22,6 +22,7 @@ log.basicConfig(
 
 app = Client("default_session", Constants.API_ID, Constants.API_HASH)
 blacklist = Constants.channels.split(",")
+log.info(f"blacklist={blacklist}")
 
 
 def get_version():
