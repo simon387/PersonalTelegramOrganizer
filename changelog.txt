@@ -1,3 +1,7 @@
+Version 1.2.8
+- added chat refresh
+- switch to fork: https://github.com/KurimuzonAkuma/pyrogram/archive/dev.zip --force-reinstall
+
 Version 1.2.7
 - better logs
 

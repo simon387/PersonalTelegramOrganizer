@@ -5,9 +5,10 @@ This software helps my Telegram chats/groups/channels management
 ## Dev's Setup
 
 + ~~```pip3 install telethon```~~
-+ ```pip3 install -U pyrogram```
++ ~~```pip3 install -U pyrogram```~~
 + ```sudo dnf install python3-devel```
 + ```pip3 install -U tgcrypto```
++ ```pip install https://github.com/KurimuzonAkuma/pyrogram/archive/dev.zip --force-reinstall```
 
 ### config.properties
 
