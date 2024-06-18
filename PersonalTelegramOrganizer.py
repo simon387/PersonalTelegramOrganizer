@@ -4,6 +4,7 @@ from logging.handlers import RotatingFileHandler
 from pyrogram import Client
 from pyrogram.errors import BadRequest
 from pyrogram.raw.functions.messages import ReadDiscussion
+from pyrogram.raw.functions.channels import GetForumTopics
 
 import Constants
 
@@ -38,24 +39,38 @@ async def on_message_set_it_as_read(client, message):
 	log.info(f"Channel {channel} found in the blacklist! Setting it as read!")
 	log.debug(f"{client.APP_VERSION} - Setting channel {channel} as read! message = {message}")
 	await app.read_chat_history(chat_id)  # this fails if it's a topic's chat
-	# START topic's management - Following code block is just for topic's chat
-	top = message.reply_to_top_message_id
-	if top:
-		topic_id = top
-	else:
-		topic_id = message.reply_to_message_id
+	#
+	# Topic's management - Following code block is just for topic's chat
+	#
+	topic_ids = [t.id for t in await get_topics(app, chat_id)]
 	resolved_peer = await client.resolve_peer(peer_id=message.chat.id)
-	log.debug(f"resolved_peer= {resolved_peer}")
-	log.debug(f"message.id= {message.id}")
-	try:
+	for topic_id in topic_ids:
 		await client.invoke(ReadDiscussion(peer=resolved_peer, msg_id=topic_id, read_max_id=2 ** 31 - 1))
-	# END topic's management
-	except BadRequest as e:
-		log.error(f"Telegram API error: {e}")
-	except AttributeError as e:
-		log.debug(f"Telegram error: {e}. Ignore this if {channel} doesn't have topics!")
-	except Exception as e:
-		log.error(f"Telegram error: {e}. This need to be investigated!")
+
+
+async def get_topics(client, chat_id):
+	topics = []
+	date, offset, offset_topic, total = 0, 0, 0, 0
+
+	while True:
+		r = await client.invoke(
+			GetForumTopics(
+				channel=await client.resolve_peer(chat_id),
+				offset_date=date,
+				offset_id=offset,
+				offset_topic=offset_topic,
+				limit=100
+			)
+		)
+		if not total: total = r.count
+		topic_list = r.topics
+		if not topic_list or len(topics) >= total: break
+		topics.extend(topic_list)
+
+		last = topic_list[-1]
+		offset_topic, offset = last.id, last.top_message
+		date = {m.id: m.date for m in r.messages}.get(offset, 0)
+	return topics
 
 
 async def refresh_chats(channel):
