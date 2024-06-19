@@ -1,3 +1,7 @@
+Version 1.2.11
+- better topics management
+- added logs
+
 Version 1.2.10
 - added better topics management
 

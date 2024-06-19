@@ -43,9 +43,10 @@ async def on_message_set_it_as_read(client, message):
 	# Topic's management - Following code block is just for topic's chat
 	#
 	topic_ids = [t.id for t in await get_topics(app, chat_id)]
-	resolved_peer = await client.resolve_peer(peer_id=message.chat.id)
-	for topic_id in topic_ids:
-		await client.invoke(ReadDiscussion(peer=resolved_peer, msg_id=topic_id, read_max_id=2 ** 31 - 1))
+	if len(topic_ids) > 0:
+		resolved_peer = await client.resolve_peer(peer_id=message.chat.id)
+		for topic_id in topic_ids:
+			await client.invoke(ReadDiscussion(peer=resolved_peer, msg_id=topic_id, read_max_id=2 ** 31 - 1))
 
 
 async def get_topics(client, chat_id):
@@ -70,6 +71,7 @@ async def get_topics(client, chat_id):
 		last = topic_list[-1]
 		offset_topic, offset = last.id, last.top_message
 		date = {m.id: m.date for m in r.messages}.get(offset, 0)
+		log.info(f"topics_id found: {topics}")
 	return topics
 
 
