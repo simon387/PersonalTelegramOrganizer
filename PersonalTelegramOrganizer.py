@@ -31,7 +31,7 @@ async def on_message_set_it_as_read(client, message):
 	channel = message.chat.username
 	chat_id = message.chat.id
 	await refresh_chats(channel)  # for better management
-	log.info(f"Got message from channel: {channel}")
+	log.info(f"Got message from channel: {channel}, chat_id: {chat_id}")
 	if channel not in blacklist:
 		log.info(f"Channel {channel} NOT found in the blacklist! Nothing to do...")
 		return
