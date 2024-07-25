@@ -21,3 +21,7 @@ else:
 # channels and group
 CHANNELS_AND_GROUPS = 'channels_and_groups'
 channels = config.get(CHANNELS_AND_GROUPS, "c")
+# options
+REFRESH_CHAT = config.get(APPLICATION, "refresh.chats")
+# var
+TRUE = "true"

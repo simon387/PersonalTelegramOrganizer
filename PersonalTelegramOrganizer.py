@@ -3,8 +3,8 @@ from logging.handlers import RotatingFileHandler
 
 from pyrogram import Client
 from pyrogram.errors import BadRequest
-from pyrogram.raw.functions.messages import ReadDiscussion
 from pyrogram.raw.functions.channels import GetForumTopics
+from pyrogram.raw.functions.messages import ReadDiscussion
 
 import Constants
 
@@ -23,14 +23,14 @@ log.basicConfig(
 
 app = Client("default_session", Constants.API_ID, Constants.API_HASH)
 blacklist = Constants.channels.split(",")
-log.info(f"blacklist={blacklist}")
 
 
 @app.on_message()
 async def on_message_set_it_as_read(client, message):
 	channel = message.chat.username
 	chat_id = message.chat.id
-	await refresh_chats(channel)  # for better management
+	if Constants.REFRESH_CHAT == Constants.TRUE:
+		await refresh_chats(channel)  # for better management
 	log.info(f"Got message from channel: {channel}, chat_id: {chat_id}")
 	if channel not in blacklist:
 		log.info(f"Channel {channel} NOT found in the blacklist! Nothing to do...")
@@ -42,11 +42,14 @@ async def on_message_set_it_as_read(client, message):
 	#
 	# Topic's management - Following code block is just for topic's chat
 	#
-	topic_ids = [t.id for t in await get_topics(app, chat_id)]
-	if len(topic_ids) > 0:
-		resolved_peer = await client.resolve_peer(peer_id=message.chat.id)
-		for topic_id in topic_ids:
-			await client.invoke(ReadDiscussion(peer=resolved_peer, msg_id=topic_id, read_max_id=2 ** 31 - 1))
+	try:
+		topic_ids = [t.id for t in await get_topics(app, chat_id)]
+		if len(topic_ids) > 0:
+			resolved_peer = await client.resolve_peer(peer_id=message.chat.id)
+			for topic_id in topic_ids:
+				await client.invoke(ReadDiscussion(peer=resolved_peer, msg_id=topic_id, read_max_id=2 ** 31 - 1))
+	except Exception as e:
+		log.error(f"Exception on topic management: {e}")
 
 
 async def get_topics(client, chat_id):
@@ -89,5 +92,7 @@ def get_version():
 	return firstline
 
 
-log.info(f'Starting PersonalTelegramOrganizer, {get_version()}')
-app.run()
+if __name__ == '__main__':
+	log.info(f'Starting PersonalTelegramOrganizer, {get_version()}')
+	log.info(f"blacklist={blacklist}")
+	app.run()

@@ -10,6 +10,8 @@ This software helps my Telegram chats/groups/channels management
 + ```pip3 install -U tgcrypto```
 + ```pip install https://github.com/KurimuzonAkuma/pyrogram/archive/dev.zip --force-reinstall```
 
+update all pip packages: ```pip-review --auto```
+
 ### config.properties
 
 ```
@@ -19,6 +21,7 @@ api.hash=
 [application]
 # log.level = info | debug | error
 log.level=info
+refresh-chats=false
 [channels_and_groups]
 c=offertepromozioniscontibaby,scontioffertepromozionicuracorpo,offertescontipromozionielettro,schedevideooffertepromozioni,liberioltre,cascorossoclub,cascorossoit,MotoGPnotizie,salottoprogrammatori,lucasalvadoricommunity,ptkdev_support_italian,entropyforlife,ClubWallapop,buscapiso,we_are_devs,circolettodevs,developerslifechannel,SteamDeckPortatil,pyrogramchat,trabajaenbarcelona,rybikESP,albertonaska,newfriendsinbarcelonaaa,r_linuxmemes,moteros_bmw,salidasmotobarcelona,BarcelonaPisos,salidasmotobarcelona,BarcelonaPiso,moteros_bmw,TelegramTipsIT,PythonAmazonPAAPI,L2UStarshipNews,link4universenews,tomorrowdevs
 ```
