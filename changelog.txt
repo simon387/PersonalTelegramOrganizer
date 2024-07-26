@@ -1,3 +1,6 @@
+Version 1.2.16
+- changed topic list log from info to debug
+
 Version 1.2.15
 - fix cast error
 

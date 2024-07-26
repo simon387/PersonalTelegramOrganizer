@@ -75,7 +75,7 @@ async def get_topics(client, chat_id):
 		last = topic_list[-1]
 		offset_topic, offset = last.id, last.top_message
 		date = {m.id: m.date for m in r.messages}.get(offset, 0)
-		log.info(f"topics_id found: {topics}")
+		log.debug(f"topics_id found: {topics}")
 	return topics
 
 
