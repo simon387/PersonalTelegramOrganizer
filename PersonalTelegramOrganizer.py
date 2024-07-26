@@ -49,7 +49,8 @@ async def on_message_set_it_as_read(client, message):
 			for topic_id in topic_ids:
 				await client.invoke(ReadDiscussion(peer=resolved_peer, msg_id=topic_id, read_max_id=2 ** 31 - 1))
 	except Exception as e:
-		log.error(f"Exception on topic management: {e}")
+		if 'CHANNEL_FORUM_MISSING' not in e:
+			log.error(f"Exception on topic management: {e}")
 
 
 async def get_topics(client, chat_id):

@@ -1,3 +1,6 @@
+Version 1.2.14
+- less useless spam in logs
+
 Version 1.2.13
 - added refresh_chats as optional
 - added main
