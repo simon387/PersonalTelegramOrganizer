@@ -1,3 +1,6 @@
+Version 1.2.15
+- fix cast error
+
 Version 1.2.14
 - less useless spam in logs
 
