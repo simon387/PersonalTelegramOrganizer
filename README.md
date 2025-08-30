@@ -26,6 +26,10 @@ refresh-chats=false
 c=offertepromozioniscontibaby,scontioffertepromozionicuracorpo,offertescontipromozionielettro,schedevideooffertepromozioni,liberioltre,cascorossoclub,cascorossoit,MotoGPnotizie,salottoprogrammatori,lucasalvadoricommunity,ptkdev_support_italian,entropyforlife,ClubWallapop,buscapiso,we_are_devs,circolettodevs,developerslifechannel,SteamDeckPortatil,pyrogramchat,trabajaenbarcelona,rybikESP,albertonaska,newfriendsinbarcelonaaa,r_linuxmemes,moteros_bmw,salidasmotobarcelona,BarcelonaPisos,salidasmotobarcelona,BarcelonaPiso,moteros_bmw,TelegramTipsIT,PythonAmazonPAAPI,L2UStarshipNews,link4universenews,tomorrowdevs,vereoffertetech
 ```
 
+## Session problems
+
+If you have problems with the session (for example, if you change your phone number), delete the `.session` file and re-run the script.
+
 ## Links
 
 + https://my.telegram.org
